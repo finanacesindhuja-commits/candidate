@@ -1,0 +1,11 @@
+node_modules
+.env
+.env.*
+dist
+build
+.vscode
+*.log
+npm_log.txt
+output.txt
+output_frontend.txt
+test.txt
