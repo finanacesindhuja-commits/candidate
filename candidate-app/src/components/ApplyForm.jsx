@@ -119,7 +119,7 @@ const ApplyForm = () => {
 
             <div className="flex justify-between items-center mb-8">
                 <h2 className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    Join Our Team
+                    sindhuja.fin | Join Our Team
                 </h2>
                 <div className="flex items-center space-x-3">
                     <button 
