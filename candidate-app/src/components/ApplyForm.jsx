@@ -109,6 +109,29 @@ const ApplyForm = () => {
 
     const [isQRModalOpen, setIsQRModalOpen] = useState(false);
 
+    const handleShare = async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'Join sindhuja.fin',
+                    text: 'Apply for a staff position at sindhuja.fin',
+                    url: window.location.origin,
+                });
+            } catch (err) {
+                console.error("Error sharing:", err);
+            }
+        } else {
+            try {
+                await navigator.clipboard.writeText(window.location.origin);
+                setStatus({ type: 'success', message: 'Link copied to clipboard!' });
+                setTimeout(() => setStatus({ type: '', message: '' }), 3000);
+            } catch (err) {
+                console.error("Failed to copy:", err);
+            }
+        }
+    };
+
+
     return (
         <div className="max-w-md w-full mx-auto p-8 bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all relative">
             <QRCodeModal 
@@ -121,18 +144,35 @@ const ApplyForm = () => {
                 <h2 className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                     sindhuja.fin | Join Our Team
                 </h2>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2">
                     <button 
+                        type="button"
+                        onClick={handleShare}
+                        className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-100 transition-all border border-emerald-100 shadow-sm flex items-center space-x-1"
+                        title="Share Link"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                        </svg>
+                        <span className="text-xs font-bold hidden sm:block">Share</span>
+                    </button>
+                    <button 
+                        type="button"
                         onClick={() => setIsQRModalOpen(true)}
-                        className="p-2 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors"
+                        className="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl hover:bg-indigo-100 transition-all border border-indigo-100 shadow-sm flex items-center space-x-1"
                         title="Show QR Code"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                         </svg>
+                        <span className="text-xs font-bold hidden sm:block">QR</span>
                     </button>
-                    <span className="text-sm font-bold text-gray-400">Step {step} of 2</span>
                 </div>
+                <div className="flex flex-col items-end">
+                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-tighter mb-0.5">Progress</span>
+                    <span className="text-sm font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100">Step {step}/2</span>
+                </div>
+
             </div>
 
 
