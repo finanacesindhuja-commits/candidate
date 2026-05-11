@@ -92,13 +92,14 @@ const QRCodeModal = ({ isOpen, onClose, url }) => {
                             level="H"
                             includeMargin={true}
                             imageSettings={{
-                                src: "https://api.dicebear.com/7.x/initials/svg?seed=SF&backgroundColor=6366f1",
+                                src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjUwIiBmaWxsPSIjNjM2NmYxIi8+PHRleHQgeD0iNTAiIHk9IjY1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDUiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iYm9sZCI+U0Y8L3RleHQ+PC9zdmc+",
                                 x: undefined,
                                 y: undefined,
-                                height: 80, // Larger logo for higher resolution
+                                height: 80,
                                 width: 80,
                                 excavate: true,
                             }}
+
                         />
                     </div>
 
