@@ -25,7 +25,7 @@ const QRCodeModal = ({ isOpen, onClose, url }) => {
                         <p className="text-gray-500 text-sm mt-2">Scan this QR code to open the application form on another device.</p>
                     </div>
 
-                    <div id="qr-printable-area" className="bg-gray-50 p-6 rounded-2xl inline-block border-2 border-dashed border-gray-200">
+                    <div className="bg-gray-50 p-6 rounded-2xl inline-block border-2 border-dashed border-gray-200">
                         <QRCodeSVG 
                             value={url || window.location.href}
                             size={200}
@@ -44,34 +44,18 @@ const QRCodeModal = ({ isOpen, onClose, url }) => {
 
                     <div className="flex space-x-3">
                         <button
-                            onClick={() => window.print()}
+                            onClick={() => {
+                                navigator.clipboard.writeText(url || window.location.href);
+                                alert('Link copied to clipboard!');
+                            }}
                             className="w-full py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-100 flex items-center justify-center space-x-2"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                             </svg>
-                            <span>Print QR</span>
+                            <span>Copy Link</span>
                         </button>
                     </div>
-
-                    <style dangerouslySetInnerHTML={{ __html: `
-                        @media print {
-                            body * {
-                                visibility: hidden;
-                            }
-                            #qr-printable-area, #qr-printable-area * {
-                                visibility: visible;
-                            }
-                            #qr-printable-area {
-                                position: fixed;
-                                left: 50%;
-                                top: 50%;
-                                transform: translate(-50%, -50%) scale(1.5);
-                                border: none;
-                                background: white;
-                            }
-                        }
-                    `}} />
                 </div>
             </div>
         </div>
