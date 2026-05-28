@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const compression = require('compression');
+const NodeCache = require('node-cache');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -9,6 +11,25 @@ const multer = require('multer');
 const nodemailer = require('nodemailer');
 
 const app = express();
+
+const cache = new NodeCache({ stdTTL: 15 });
+const flushCache = () => cache.flushAll();
+const cacheMiddleware = (duration = 15) => (req, res, next) => {
+  if (req.method !== 'GET') return next();
+  const key = req.originalUrl;
+  const cachedResponse = cache.get(key);
+  if (cachedResponse) return res.json(cachedResponse);
+  res.sendResponse = res.json;
+  res.json = (body) => {
+    if (res.statusCode >= 200 && res.statusCode < 300) {
+      cache.set(key, body, duration);
+    }
+    res.sendResponse(body);
+  };
+  next();
+};
+
+app.use(compression());
 const PORT = process.env.PORT || 3001;
 
 // Email Transporter Configuration
@@ -46,6 +67,16 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method) && res.statusCode >= 200 && res.statusCode < 300) {
+      flushCache();
+    }
+  });
+  next();
+});
+
 
 // Rate limiting for the application endpoint
 const applyLimiter = rateLimit({
