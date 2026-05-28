@@ -171,111 +171,111 @@ const ApplyForm = () => {
                 {step === 1 ? (
                     <div className="space-y-4 animate-fade-in">
                         <div>
-                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Full Name</label>
+                            <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Full Name</label>
                             <input
                                 type="text"
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
+                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Email ID</label>
+                            <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Email ID</label>
                             <input
                                 type="email"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
+                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
                             />
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Father's Name</label>
+                                <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Father's Name</label>
                                 <input
                                     type="text"
                                     name="fathers_name"
                                     value={formData.fathers_name}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
+                                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Mother's Name</label>
+                                <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Mother's Name</label>
                                 <input
                                     type="text"
                                     name="mothers_name"
                                     value={formData.mothers_name}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
+                                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
                                 />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Mobile</label>
+                                <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Mobile</label>
                                 <input
                                     type="tel"
                                     name="mobile"
                                     value={formData.mobile}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
+                                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Alternative Number</label>
+                                <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Alternative Number</label>
                                 <input
                                     type="tel"
                                     name="alternative_mobile"
                                     value={formData.alternative_mobile}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
+                                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Degree / Qualification</label>
+                            <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Degree / Qualification</label>
                             <input
                                 type="text"
                                 name="degree"
                                 value={formData.degree}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
+                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Experience</label>
+                            <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Experience</label>
                             <input
                                 type="text"
                                 name="experience"
                                 value={formData.experience}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
+                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-base"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Full Address</label>
+                            <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Full Address</label>
                             <textarea
                                 name="area"
                                 value={formData.area}
                                 onChange={handleChange}
                                 required
                                 rows="3"
-                                className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium resize-none"
+                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium resize-none"
                             />
                         </div>
 
@@ -289,13 +289,13 @@ const ApplyForm = () => {
                 ) : (
                     <div className="space-y-6 animate-fade-in">
                         <div>
-                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Select Your Role</label>
+                            <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">Select Your Role</label>
                             <select
                                 name="role"
                                 value={formData.role}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-gray-600"
+                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-900 shadow-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none font-medium text-gray-600"
                             >
                                 <option value="">-- Choose a Role --</option>
                                 <option value="Relationship Officer">Relationship Officer</option>
@@ -309,48 +309,48 @@ const ApplyForm = () => {
 
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">1. Candidate Photo</label>
+                                <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">1. Candidate Photo</label>
                                 <input
                                     type="file"
                                     name="image"
                                     accept="image/*"
                                     onChange={handleFileChange}
-                                    className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer"
+                                    className="w-full text-sm text-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer"
                                 />
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">2. 10th Marksheet</label>
+                                    <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">2. 10th Marksheet</label>
                                     <input
                                         type="file"
                                         name="cert_10th"
                                         accept="image/*,.pdf"
                                         onChange={handleFileChange}
-                                        className="w-full text-xs text-gray-500 file:mr-2 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer"
+                                        className="w-full text-xs text-gray-800 file:mr-2 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">3. 12th Marksheet</label>
+                                    <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">3. 12th Marksheet</label>
                                     <input
                                         type="file"
                                         name="cert_12th"
                                         accept="image/*,.pdf"
                                         onChange={handleFileChange}
-                                        className="w-full text-xs text-gray-500 file:mr-2 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer"
+                                        className="w-full text-xs text-gray-800 file:mr-2 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer"
                                     />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">4. Degree Certificate</label>
+                                    <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-1">4. Degree Certificate</label>
                                     <input
                                         type="file"
                                         name="cert_degree"
                                         accept="image/*,.pdf"
                                         onChange={handleFileChange}
-                                        className="w-full text-xs text-gray-500 file:mr-2 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer"
+                                        className="w-full text-xs text-gray-800 file:mr-2 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer"
                                     />
                                 </div>
                             </div>
