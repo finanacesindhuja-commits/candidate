@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import QRCodeModal from './QRCodeModal';
 
-
 const ApplyForm = () => {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
@@ -24,6 +23,7 @@ const ApplyForm = () => {
     });
     const [status, setStatus] = useState({ type: '', message: '' });
     const [loading, setLoading] = useState(false);
+    const [isQRModalOpen, setIsQRModalOpen] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -107,7 +107,6 @@ const ApplyForm = () => {
         }
     };
 
-    const [isQRModalOpen, setIsQRModalOpen] = useState(false);
 
     const handleShare = async () => {
         if (navigator.share) {
@@ -141,21 +140,14 @@ const ApplyForm = () => {
             />
 
             <div className="flex justify-between items-center mb-8">
-                <h2 className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                <h2 
+                    className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent select-none cursor-default"
+                    onDoubleClick={() => setIsQRModalOpen(true)}
+                    title=""
+                >
                     sindhuja.fin | Join Our Team
                 </h2>
                 <div className="flex items-center space-x-2">
-                    <button 
-                        type="button"
-                        onClick={() => setIsQRModalOpen(true)}
-                        className="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl hover:bg-indigo-100 transition-all border border-indigo-100 shadow-sm flex items-center space-x-1"
-                        title="Show QR Code"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
-                        </svg>
-                        <span className="text-xs font-bold hidden sm:block">QR</span>
-                    </button>
                 </div>
 
                 <div className="flex flex-col items-end">
