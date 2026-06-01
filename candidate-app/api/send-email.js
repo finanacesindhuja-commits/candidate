@@ -23,18 +23,21 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
+        const emailUser = process.env.EMAIL_USER || 'sindhujafinance7@gmail.com';
+        const emailPass = process.env.EMAIL_PASS || 'fnfvfiicdkpgpkrc';
+
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 465,
             secure: true,
             auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS
+                user: emailUser,
+                pass: emailPass
             }
         });
 
         const info = await transporter.sendMail({
-            from: `Candidate App <${process.env.EMAIL_USER}>`,
+            from: `Candidate App <${emailUser}>`,
             to,
             subject,
             html
