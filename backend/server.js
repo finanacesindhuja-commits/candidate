@@ -227,16 +227,13 @@ app.post('/apply', applyLimiter, upload.fields([
 
         console.log('Application saved successfully');
 
-        // Send confirmation email - awaited for proper error logging
-        try {
-            await sendConfirmationEmail(email, name);
-            console.log('Confirmation email sent to:', email);
-        } catch (emailErr) {
-            console.error('Email send failed:', emailErr.message);
-            // Don't fail the request if email fails
-        }
-
+        // Respond immediately - don't block on email
         res.status(200).json({ message: 'Application submitted successfully', data });
+
+        // Send email in background after response
+        sendConfirmationEmail(email, name)
+            .then(() => console.log('Confirmation email sent to:', email))
+            .catch(err => console.error('Email send failed:', err.message));
     } catch (err) {
         console.error('Caught Server Error:', err);
         const message = process.env.NODE_ENV === 'production' 
