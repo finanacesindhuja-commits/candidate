@@ -111,32 +111,40 @@ async function uploadToSupabase(file, bucket, folder) {
     return publicUrlData.publicUrl;
 }
 
-// Function to send confirmation email
+// Function to send confirmation email via Vercel API (bypassing Render SMTP block)
 async function sendConfirmationEmail(applicantEmail, applicantName) {
-    const mailOptions = {
-        from: `Candidate App <${process.env.EMAIL_USER}>`,
-        to: applicantEmail,
-        subject: 'Application Received - Join Our Team',
-        text: `Hi ${applicantName},\n\nThank you for applying! We've received your application and our team will review it shortly.\n\nBest regards,\nCandidate App Team`,
-        html: `
-            <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                <h2 style="color: #4f46e5;">Application Received!</h2>
-                <p>Hi <strong>${applicantName}</strong>,</p>
-                <p>Thank you for applying! We've received your application and our team will review it shortly to see if you're a good fit for the role.</p>
-                <p>We'll get back to you soon.</p>
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
-                <p style="font-size: 12px; color: #666;">This is an automated message, please do not reply to this email.</p>
-            </div>
-        `
-    };
+    const html = `
+        <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h2 style="color: #4f46e5;">Application Received!</h2>
+            <p>Hi <strong>${applicantName}</strong>,</p>
+            <p>Thank you for applying! We've received your application and our team will review it shortly to see if you're a good fit for the role.</p>
+            <p>We'll get back to you soon.</p>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+            <p style="font-size: 12px; color: #666;">This is an automated message, please do not reply to this email.</p>
+        </div>
+    `;
 
     try {
-        const info = await transporter.sendMail(mailOptions);
-        console.log('Confirmation email sent:', info.messageId);
-        return info;
+        // We use dynamic import for fetch since node 18+ has global fetch, but just in case
+        const response = await fetch('https://candidate-phi.vercel.app/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                to: applicantEmail,
+                subject: 'Application Received - Join Our Team',
+                html: html
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Email API failed: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        console.log('Confirmation email sent via Vercel:', data);
+        return data;
     } catch (error) {
-        console.error('Error sending confirmation email:', error);
-        // We don't want to fail the whole application if email fails
+        console.error('Error sending confirmation email:', error.message);
         return null;
     }
 }
