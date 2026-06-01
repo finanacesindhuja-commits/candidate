@@ -1,7 +1,6 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
-// Ensure this only responds to POST requests
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     // Enable CORS
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -46,4 +45,4 @@ module.exports = async (req, res) => {
         console.error('Email API Error:', error);
         res.status(500).json({ error: error.message });
     }
-};
+}
