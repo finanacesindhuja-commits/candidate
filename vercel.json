@@ -17,6 +17,10 @@
       "destination": "/api/index.js"
     },
     {
+      "source": "/qr",
+      "destination": "/candidate-app/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/candidate-app/$1"
     }
