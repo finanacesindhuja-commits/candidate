@@ -32,9 +32,11 @@ const cacheMiddleware = (duration = 15) => (req, res, next) => {
 app.use(compression());
 const PORT = process.env.PORT || 3001;
 
-// Email Transporter Configuration
+// Email Transporter Configuration - explicit SMTP for reliability
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // STARTTLS
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -47,9 +49,11 @@ const transporter = nodemailer.createTransport({
 // Verify connection configuration
 transporter.verify((error, success) => {
     if (error) {
-        console.error('SMTP Connection Error:', error);
+        console.error('SMTP Connection Error:', error.message);
+        console.error('EMAIL_USER set:', !!process.env.EMAIL_USER);
+        console.error('EMAIL_PASS set:', !!process.env.EMAIL_PASS);
     } else {
-        console.log('SMTP Server is ready to send emails');
+        console.log('SMTP Server is ready to send emails ✅');
     }
 });
 
@@ -222,9 +226,15 @@ app.post('/apply', applyLimiter, upload.fields([
         }
 
         console.log('Application saved successfully');
-        
-        // Trigger automated email (don't await so response isn't blocked)
-        sendConfirmationEmail(email, name);
+
+        // Send confirmation email - awaited for proper error logging
+        try {
+            await sendConfirmationEmail(email, name);
+            console.log('Confirmation email sent to:', email);
+        } catch (emailErr) {
+            console.error('Email send failed:', emailErr.message);
+            // Don't fail the request if email fails
+        }
 
         res.status(200).json({ message: 'Application submitted successfully', data });
     } catch (err) {
@@ -238,7 +248,30 @@ app.post('/apply', applyLimiter, upload.fields([
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-    res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+    res.status(200).json({
+        status: 'OK',
+        timestamp: new Date().toISOString(),
+        email_configured: !!process.env.EMAIL_USER && !!process.env.EMAIL_PASS
+    });
+});
+
+// Test email endpoint - for debugging only
+app.get('/test-email', async (req, res) => {
+    const testTo = req.query.to || process.env.EMAIL_USER;
+    try {
+        const info = await transporter.sendMail({
+            from: `Candidate App <${process.env.EMAIL_USER}>`,
+            to: testTo,
+            subject: 'Test Email - Candidate App',
+            html: '<h2>✅ Email is working!</h2><p>Your email configuration on Render is correct.</p>'
+        });
+        res.json({ success: true, messageId: info.messageId, to: testTo });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message,
+            email_user: process.env.EMAIL_USER || 'NOT SET',
+            email_pass_set: !!process.env.EMAIL_PASS
+        });
+    }
 });
 
 // Global Error Handler
